@@ -51,7 +51,7 @@ app.post('/login',async (req,res)=>{
         res.status(201).json({message:'done'})
        
     }else{
-     res.status(201).json({message:'not_done'}) 
+     res.status(404).json({message:'not_done'}) 
     }
 })
 
