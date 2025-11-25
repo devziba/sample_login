@@ -26,9 +26,32 @@ app.post('/register',async (req,res)=>{
         })
         let token = jwt.sign({email:createdUser.email,id:createdUser._id},'secret')
         res.cookie('token',token)
-        res.json({message:'done'})
+        res.status(201).json({message:'done'})
     }else{
-    res.json({message:'not_done'})
+    res.status(409).json({message:'not_done'}) 
+    }
+})
+
+ function isLoggedIn(req,res,next){
+    if(req.cookies.token==="" || req.cookie.token === undefined){
+            res.json({message:'not_logged_in'})
+    }else{
+            let data = jwt.verify(req.cookies.token,'secret')
+            req.user = data
+            next();
+        }
+    
+ }
+
+app.post('/login',async (req,res)=>{
+    let myUser = await user.findOne({email: req.body.email})
+    if(myUser){
+        let token = jwt.sign({email:createdUser.email,id:createdUser._id},'secret')
+        res.cookie('token',token)
+        res.status(201).json({message:'done'})
+       
+    }else{
+     res.status(409).json({message:'not_done'}) 
     }
 })
 
