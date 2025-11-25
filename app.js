@@ -16,8 +16,7 @@ app.use(express.json())
 
 app.post('/register',async (req,res)=>{
     try{
-
-    
+    res.send('hello')
     let salt = await bcrypt.genSalt(10)
     let hash = await bcrypt.hash(req.body.password,salt)
 
