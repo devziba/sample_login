@@ -46,7 +46,7 @@ app.post('/register',async (req,res)=>{
 app.post('/login',async (req,res)=>{
     let myUser = await user.findOne({email: req.body.email})
     if(myUser){
-        let token = jwt.sign({email:createdUser.email,id:createdUser._id},'secret')
+        let token = jwt.sign({email:myUser.email,id:myUser._id},'secret')
         res.cookie('token',token)
         res.status(201).json({message:'done'})
        
