@@ -48,7 +48,7 @@ app.post('/login',async (req,res)=>{
 
     if(!myUser) return res.status(404).json({message:'not_done'}) 
 
-        let pass = bcrypt.compare(req.body.password,myUser.password)
+        let pass = await bcrypt.compare(req.body.password,myUser.password)
         if(!pass) return res.status(401).json({message:'wrong_password'})
 
         let token = jwt.sign({email:myUser.email,id:myUser._id},'secret')
