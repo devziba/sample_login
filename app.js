@@ -45,14 +45,15 @@ app.post('/register',async (req,res)=>{
 
 app.post('/login',async (req,res)=>{
     let myUser = await user.findOne({email: req.body.email})
-    if(myUser){
+
+    if(!myUser) return res.status(404).json({message:'not_done'}) 
+
+        let pass = bcrypt.compare(req.body.password,myUser.password)
+        if(!pass) return res.status(401).json({message:'wrong_password'})
+
         let token = jwt.sign({email:myUser.email,id:myUser._id},'secret')
         res.cookie('token',token)
         res.status(201).json({message:'done'})
-       
-    }else{
-     res.status(404).json({message:'not_done'}) 
-    }
 })
 
 const PORT = process.env.PORT || 3000;
