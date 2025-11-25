@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(express.json())
 
 
-app.get('/',(req,res)=>{
-    res.status(200).json({message:'done fucker'})
+app.get('/login',(req,res)=>{
+    
 })
 
 const PORT = process.env.PORT || 3000;
