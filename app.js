@@ -14,7 +14,7 @@ app.use(express.json())
 
 
 app.get('/',(req,res)=>{
-    res.send('hello  hey')
+    res.status(200).json({message:'done'})
 })
 
 const PORT = process.env.PORT || 3000;
