@@ -56,7 +56,7 @@ app.post('/login',async (req,res)=>{
 })
 
 
-app.get('/users',isLoggedIn, async (req,res)=>{
+app.get('/users', async (req,res)=>{
     let allUsers = await user.find()
     
     res.status(200).json({
