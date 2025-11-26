@@ -33,7 +33,7 @@ app.post('/register',async (req,res)=>{
 })
 
  function isLoggedIn(req,res,next){
-    if(req.cookies.token==="" || req.cookie.token === undefined){
+    if(req.cookies.token==="" || req.cookies.token === undefined){
             res.json({message:'not_logged_in'})
     }else{
             let data = jwt.verify(req.cookies.token,'secret')
@@ -63,8 +63,7 @@ app.get('/users',isLoggedIn,async (req,res)=>{
     res.status(200).json({
         users:allUsers.map(
             it => it.username
-        )
-    })       
+        )})       
 })
 
 const PORT = process.env.PORT || 3000;
