@@ -56,5 +56,16 @@ app.post('/login',async (req,res)=>{
         res.status(201).json({message:'done'})
 })
 
+
+app.get('/users',isLoggedIn,async (req,res)=>{
+    let allUsers = await user.find()
+    
+    res.status(200).json({
+        users:allUsers.map(
+            it => it.username
+        )
+    })       
+})
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT)
