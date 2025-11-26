@@ -34,13 +34,12 @@ app.post('/register',async (req,res)=>{
 
  function isLoggedIn(req,res,next){
     if(req.cookies.token==="" || req.cookies.token === undefined){
-            res.json({message:'not_logged_in'})
+            res.status(409).json({message:'not_logged_in'})
     }else{
             let data = jwt.verify(req.cookies.token,'secret')
             req.user = data
             next();
         }
-    
  }
 
 app.post('/login',async (req,res)=>{
